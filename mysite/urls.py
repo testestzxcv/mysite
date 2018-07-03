@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('board/', board_views.list),
     path('board/write', board_views.write),
+    path('board/add', board_views.add),
 
     path('guestbook/', guest_views.list),
     path('guestbook/add', guest_views.add),

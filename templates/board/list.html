@@ -1,27 +1,12 @@
+{% extends "../base.html" %} <!--상속받는다는 표시-->
 {% load mathfilters %}
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>mysite</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
+{% block css_link %}
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1><a href="/">MySite</a> </h1>
-			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
-		<div id="content">
+{% endblock %}
+			{% block content %}
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="" method="post">{% csrf_token %}
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -33,33 +18,20 @@
 						<th>조회수</th>
 						<th>작성일</th>
 						<th>&nbsp;</th>
-					</tr>				
-				{ % for board in board_list %}
+					</tr>
+					{% for board in board_list %}
 					<tr>
 						<td>{{ board_list.count | add:1 | sub:forloop.counter }}</td> <!-- 전체 게시판 갯수 | +1 | 카운트-->
-						<td><a href="">{{ title }}</a></td>
-						<td>{{ board.user }}</td>
+						<td><a href="">{{ board.title }}</a></td>
+						<td>{{ board.name }}</td>
 						<td>{{ board.hit }}</td>
-						<td>{{ board.regdate }}</td>
+						<td>{{ board.regdate|date:'Y-m-d H:i:s' }}</td>
 						<td><a href="" class="del">삭제</a></td>
 					</tr>
-				{ % endfor %}
+					{% endfor %}
+
 				</table>
 				<div class="bottom">
 					<a href="/board/write" id="new-book">글쓰기</a>
-				</div>				
-			</div>
-		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="/">안대혁</a></li>
-				<li><a href="/guestbook">방명록</a></li>
-				<li><a href="/board">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
-	</div>
-</body>
-</html>
+				</div>
+				{% endblock %}
