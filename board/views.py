@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from board.models import Board
 
 # Create your views here.
 
@@ -9,7 +10,9 @@ def writeform(request):
         return HttpResponseRedirect('/user/loginform')
 
 def list(request):
-    return render(request, 'board/list.html')
+    board_list = Board.objects.all().order_by('-regdate')
+    context = {'board_list':board_list}
+    return render(request, 'board/list.html', context)
 
 def write(request):
     return render(request, 'board/write.html')

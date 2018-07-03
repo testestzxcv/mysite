@@ -33,6 +33,7 @@ urlpatterns = [
     path('guestbook/', guest_views.list),
     path('guestbook/add', guest_views.add),
     path('guestbook/deleteform/', guest_views.deleteform),
+    path('guestbook/delete', guest_views.delete),
 
     path('user/joinform/', user_views.joinform),
     path('user/join', user_views.join),
