@@ -23,8 +23,8 @@ def add(request):
     board.title = request.POST['title']
     board.content = request.POST['content']
     board.hit += 1
-    # board.user_id = request.session['authuser']['id']
-    # board.name = request.session['authuser']['name']
+    board.user_id = request.session['authuser']['id']
+    board.name = request.session['authuser']['name']
 
     board.save()
     return HttpResponseRedirect('/board')
