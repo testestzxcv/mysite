@@ -10,6 +10,13 @@ def writeform(request):
     if request.session['author'] is None:
         return HttpResponseRedirect('/user/loginform')
 
+def view(request):
+    print('board_list====', board_list)
+    id = request.GET.get('id',False)
+    board_list = Board.objects.filter(id=id)
+    context = ("board_list", board_list)
+    return render(request, 'board/view.html',context)
+
 def write(request):
     return render(request, 'board/write.html')
 

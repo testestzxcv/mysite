@@ -22,7 +22,7 @@
 					{% for board in board_list %}
 					<tr>
 						<td>{{ board_list.count | add:1 | sub:forloop.counter }}</td> <!-- 전체 게시판 갯수 | +1 | 카운트-->
-						<td><a href="">{{ board.title }}</a></td>
+						<td><a href="/board/view">{{ board.title }}</a></td>
 						<td>{{ board.user.name }}</td>
 						<td>{{ board.hit }}</td>
 						<td>{{ board.regdate|date:'Y-m-d H:i:s' }}</td>
