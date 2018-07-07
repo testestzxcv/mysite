@@ -31,7 +31,12 @@
 					{% endfor %}
 
 				</table>
+				{% if request.session.authuser is None %}
+					글쓰기는 로그인 이후에 가능합니다.
+				{% else %}
 				<div class="bottom">
 					<a href="/board/write" id="new-book">글쓰기</a>
 				</div>
+				{% endif %}
+
 				{% endblock %}
