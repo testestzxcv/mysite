@@ -11,11 +11,13 @@ def writeform(request):
         return HttpResponseRedirect('/user/loginform')
 
 def view(request):
-    print('board_list====', board_list)
-    id = request.GET.get('id',False)
-    board_list = Board.objects.filter(id=id)
-    context = ("board_list", board_list)
-    return render(request, 'board/view.html',context)
+    id = request.GET['id']
+    board_view = Board.objects.get(id=id)
+    Board.objects.filter(id=id).update(hit=Board.objects.get(id=id).hit + 1)
+    context = {'board_view' : board_view}
+
+    return render(request, 'board/view.html', context)
+
 
 def write(request):
     return render(request, 'board/write.html')
@@ -29,9 +31,38 @@ def add(request):
     board = Board()
     board.title = request.POST['title']
     board.content = request.POST['content']
-    board.hit += 1
     board.user_id = request.session['authuser']['id']
     board.name = request.session['authuser']['name']
 
     board.save()
     return HttpResponseRedirect('/board')
+
+def deleteform(request):
+    id = request.GET.get('id',False)
+    context = {'id':id}
+    return render(request, 'board/deleteform.html', context)
+
+def delete(request):
+    id = request.POST['no2']
+    Board.objects.filter(id=id).delete()
+
+    return HttpResponseRedirect('/board')
+
+def modifyform(request):
+    id = request.GET['id']
+    board_view = Board.objects.get(id=id)
+    context = {'board_view': board_view}
+
+    return render(request, 'board/modifyform.html', context)
+
+def modify(request):
+    id = request.POST.get('id')
+    board_save = Board.objects.get(id=id)
+    board_save.title = request.POST['title']
+    board_save.content = request.POST['content']
+    board_save.save()
+
+    return HttpResponseRedirect('/board/view?id='+id)
+
+def search(request):
+    return render(request, 'board/search.html')

@@ -44,5 +44,6 @@ def logout(request):
     del request.session['authuser']
     return HttpResponseRedirect('/')
 
-
+def modifyform(request):
+    return render(request, 'user/modifyform.html')
 

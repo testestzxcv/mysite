@@ -6,7 +6,7 @@
 {% endblock %}
 			{% block content %}
 			<div id="board">
-				<form id="search_form" action="" method="post">{% csrf_token %}
+				<form id="search_form" action="/board/search" method="post">{% csrf_token %}
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -22,11 +22,11 @@
 					{% for board in board_list %}
 					<tr>
 						<td>{{ board_list.count | add:1 | sub:forloop.counter }}</td> <!-- 전체 게시판 갯수 | +1 | 카운트-->
-						<td><a href="/board/view">{{ board.title }}</a></td>
+						<td><a href="/board/view?id={{ board.id}} ">{{ board.title }}</a></td>
 						<td>{{ board.user.name }}</td>
 						<td>{{ board.hit }}</td>
 						<td>{{ board.regdate|date:'Y-m-d H:i:s' }}</td>
-						<td><a href="" class="del">삭제</a></td>
+						<td><a href="/board/deleteform?id={{ board.id }}" class="del"><img id="delete" src="/assets/images/recycle.png"> 삭제</a></td>
 					</tr>
 					{% endfor %}
 

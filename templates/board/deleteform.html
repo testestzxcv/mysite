@@ -1,0 +1,19 @@
+{% extends "../base.html" %} <!--상속받는다는 표시-->
+
+{% block css_link %}
+<link href="/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+		{% block content %}
+		<div id="content">
+			<div id="/board" class="del">
+				<form method="post" action="/board/delete">{% csrf_token %}
+					<input type='hidden' name="no2" value="{{ id }}">
+					<label>정말 지우시겠습니까?</label>
+					<input type="submit" value="확인">
+					<a href="/board/"><input type="button" value="취소"></a>
+				</form>
+				<a href="/board/">게시판 리스트</a>
+			</div>
+		</div>
+		{% endblock %}

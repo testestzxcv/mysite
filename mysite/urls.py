@@ -30,7 +30,12 @@ urlpatterns = [
     path('board/', board_views.list),
     path('board/write', board_views.write),
     path('board/add', board_views.add),
-    path('board/view', board_views.view),
+    path('board/view/', board_views.view),
+    path('board/deleteform', board_views.deleteform),
+    path('board/delete', board_views.delete),
+    path('board/modifyform', board_views.modifyform),
+    path('board/modify', board_views.modify),
+    path('board/search', board_views.search),
 
     path('guestbook/', guest_views.list),
     path('guestbook/add', guest_views.add),
@@ -43,6 +48,7 @@ urlpatterns = [
     path('user/loginform/', user_views.loginform),
     path('user/login', user_views.login),
     path('user/logout', user_views.logout),
+    path('user/modifyform', user_views.modifyform),
 
     path('admin/', admin.site.urls),
 ]
